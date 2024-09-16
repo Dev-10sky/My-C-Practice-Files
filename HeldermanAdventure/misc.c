@@ -1,5 +1,12 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "object.h"
+#include "misc.h"
+
+bool isHolding(OBJECT *container, OBJECT *obj)
+{
+	return obj != NULL && obj->location == container;
+}
 
 OBJECT *getPassage(OBJECT *from, OBJECT *to)
 {
@@ -8,7 +15,7 @@ OBJECT *getPassage(OBJECT *from, OBJECT *to)
 		OBJECT *obj;
 		for (obj = objs; obj < endOfObjs; obj++)
 		{
-			if (obj->location == from && obj->destination == to)
+			if (isHolding(from, obj) && obj->destination == to)
 			{
 				return obj;
 			}
@@ -17,12 +24,25 @@ OBJECT *getPassage(OBJECT *from, OBJECT *to)
 	return NULL;
 }
 
+DISTANCE getDistance(OBJECT *from, OBJECT *to)
+{
+	return to == NULL ? distUnknownObject :
+		to == from ? distSelf :
+		isHolding(from, to) ? distHeld :
+		isHolding(to, from) ? distLocation :
+		isHolding(from->location, to) ? distHere :
+		isHolding(from, to->location) ? distHeldContained :
+		isHolding(from->location, to->location) ? distHereContained :
+		getPassage(from->location, to) != NULL ? distOverThere :
+							distNotHere;
+}
+
 OBJECT *actorHere(void)
 {
 	OBJECT *obj;
 	for (obj = objs; obj < endOfObjs; obj++)
 	{
-		if (obj->location == player->location && obj == guard)
+		if (isHolding(player->location, obj) && obj == guard)
 		{
 			return obj;
 		}
@@ -37,7 +57,7 @@ int listObjectsAtLocation(OBJECT *location)
 	OBJECT *obj;
 	for (obj = objs; obj < endOfObjs; obj++)
 	{
-		if (obj != player && obj->location == location)
+		if (obj != player && isHolding(location, obj))
 		{
 			if (count++ == 0)
 			{

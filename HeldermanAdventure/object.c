@@ -13,5 +13,7 @@ OBJECT objs[] =
 	{"a worn out brown basket","basket", forest, NULL},
 	{"yourself","yourself", field, NULL},
 	{"a cave entrance","entrance", field, cave},
-	{"an exit","exit", cave, field}
+	{"an exit","exit", cave, field},
+	{"a forest entrance","forestEntrance", field, forest},
+	{"a forest exit","forestExit", forest, field}
 };

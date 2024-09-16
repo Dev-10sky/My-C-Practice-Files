@@ -1,25 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "object.h"
 #include "misc.h"
 #include "noun.h"
-
-/*
-struct location {
-	const char *description;
-	const char *tag;
-}
-locs[] = {
-	{"an open grassy field", "field"},
-	{"a dark miasma laden dark forest", "forest"},
-	{"a little dark mountanside cave", "cave"}
-
-};
-
-#define numberOfLocations (sizeof locs / sizeof *locs)
-
-static unsigned locationOfPlayer = 0;
-*/
 
 void executeLook(const char *noun)
 {
@@ -36,51 +20,30 @@ void executeLook(const char *noun)
 
 void executeGo(const char *noun)
 {
-/*
-	unsigned i;
-	for (i = 0; i < numberOfLocations; i++)
-	{
-		if (noun != NULL && strcmp(noun, locs[i].tag) == 0)
-		{
-			if (i == locationOfPlayer)
-			{
-				printf("You can't get much closer than this.\n");
-			}
-			else
-			{
-				printf("Ok.\n");
-				locationOfPlayer = i;
-				executeLook("around");
-			}
-			return;
-		}
-	}
-	printf("I don't understand where you want to go. Please be clearer!\n");
-*/
-
 	OBJECT *obj = getVisible("where you want to go", noun);
-	if (obj == NULL)
+	switch (getDistance(player, obj))
 	{
-		// getVisible handles this section
-	}
-	else if (getPassage(player->location, obj) != NULL)
-	{
+	case distOverThere:
 		printf("Ok.\n");
 		player->location = obj;
 		executeLook("around");
-	}
-	else if (obj->location != player->location)
-	{
+		break;
+	case distNotHere:
 		printf("You don't see any %s here.\n", noun);
-	}
-	else if (obj->destination != NULL)
-	{
-		printf("Ok.\n");
-		player->location = obj->destination;
-		executeLook("around");
-	}
-	else
-	{
-		printf("You can't get much closer than this.\n");
+		break;
+	case distUnknownObject:
+		// getVisible handles this section
+		break;
+	default:
+		if (obj->destination != NULL)
+		{
+			printf("Ok.\n");
+			player->location = obj->destination;
+			executeLook("around");
+		}
+		else
+		{
+			printf("You can't get much closer than this.\n");
+		}
 	}
 }

@@ -20,8 +20,10 @@ extern OBJECT objs[];
 #define player (objs + 7)
 #define enterCave (objs + 8)
 #define exitCave (objs + 9)
+#define enterForest (objs + 10)
+#define exitForest (objs + 11)
 
-#define endOfObjs (objs + 10)
+#define endOfObjs (objs + 12)
 
 
 #endif
