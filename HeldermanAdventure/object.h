@@ -3,7 +3,7 @@
 
 typedef struct  object {
 	const char *description;
-	const char *tag;
+	const char **tags;
 	struct object *location;
 	struct object *destination;
 } OBJECT;
@@ -22,8 +22,10 @@ extern OBJECT objs[];
 #define exitCave (objs + 9)
 #define enterForest (objs + 10)
 #define exitForest (objs + 11)
+#define wallField (objs + 12)
+#define wallCave (objs + 13)
 
-#define endOfObjs (objs + 12)
+#define endOfObjs (objs + 14)
 
 
 #endif
