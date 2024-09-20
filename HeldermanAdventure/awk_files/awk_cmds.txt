@@ -1,0 +1,4 @@
+-ObjectCmds
+awk -v pass=h -v RS='\r\n' -f awk_files/object.awk txt_files/object.txt > object.h
+awk -v pass=c1 -v RS='\r\n' -f awk_files/object.awk txt_files/object.txt > object.c
+awk -v pass=c2 -v RS='\r\n' -f awk_files/object.awk txt_files/object.txt >> object.c

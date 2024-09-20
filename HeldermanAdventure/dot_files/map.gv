@@ -1,0 +1,6 @@
+digraph map {
+	field -> cave
+	cave -> field
+	field -> forest
+	forest -> field
+}

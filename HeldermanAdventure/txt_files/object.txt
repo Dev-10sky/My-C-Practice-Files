@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include "object.h"
+
+typedef struct object
+{
+    const char *description;
+    const char **tags;
+    struct object *location;
+    struct object *destination;
+} OBJECT;
+
+extern OBJECT objs[];
+
+- field
+    description "an open grassy field"
+    tags        "field"
+
+- cave
+    description "a little dark mountanside cave"
+    tags        "cave"
+
+- forest
+    description "dark miasma laden dark forest"
+    tags        "forest"
+
+- silver
+    description "a shining silver coin"
+    tags        "silver", "coin", "silver coin"
+    location    field
+
+- gold
+    description "a blessed lustrous golden coin"
+    tags        "gold", "coin", "gold coin"
+    location    cave
+
+- guard
+    description "a burly guard"
+    tags        "guard", "burly guard"
+    location    field
+
+- basket
+    description "a worn out brown basket"
+    tags        "basket"
+    location    forest
+
+- player
+    description "yourself"
+    tags        "yourself"
+    location    field
+
+- enterCave
+    description "a cave entrance to the east"
+    tags        "east", "entrance"
+    location    field
+    destination cave
+
+- exitCave
+    description "an exit to the west"
+    tags        "west", "exit"
+    location    cave
+    destination field
+
+- enterForest
+    description "a forest entrance to the west"
+    tags        "forest entrance"
+    location    field
+    destination forest
+
+- exitForest
+    description "an exit to the east"
+    tags        "forest exit"
+    location    forest
+    destination field
+
+- wallField
+    description "flat grass all around"
+    tags        "west", "north", "south", "grass"
+    location    field
+
+- wallCave
+    description "solid rock all around"
+    tags        "east", "north", "south", "rock"
+    location    cave

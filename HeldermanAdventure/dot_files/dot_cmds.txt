@@ -1,0 +1,3 @@
+- Location Map
+awk -v RS='\r\n' -f awk_files/map.awk txt_files/object.txt > dot_files/map.gv
+dot -Tpng -o images/map.png dot_files/map.gv
