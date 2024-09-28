@@ -1,6 +1,6 @@
 digraph map {
-	field -> cave
+	field -> cave [style=dashed]
 	cave -> field
-	field -> forest
+	field -> forest [style=dashed]
 	forest -> field
 }

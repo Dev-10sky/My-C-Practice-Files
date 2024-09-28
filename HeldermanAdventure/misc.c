@@ -42,7 +42,7 @@ OBJECT *actorHere(void)
 	OBJECT *obj;
 	for (obj = objs; obj < endOfObjs; obj++)
 	{
-		if (isHolding(player->location, obj) && obj == guard)
+		if (isHolding(player->location, obj) && obj != player && obj->health > 0)
 		{
 			return obj;
 		}
@@ -61,7 +61,7 @@ int listObjectsAtLocation(OBJECT *location)
 		{
 			if (count++ == 0)
 			{
-				printf("You see.\n");
+				printf("%s:\n", location->contents);
 			}
 			printf("%s\n", obj->description);
 		}
