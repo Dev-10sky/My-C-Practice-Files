@@ -52,6 +52,7 @@ void executeGo(const char *noun)
 	{
 	case distOverThere:
 		movePlayer(getPassage(player->location, obj));
+		break;
 	case distNotHere:
 		printf("You don't see any %s here.\n", noun);
 		break;

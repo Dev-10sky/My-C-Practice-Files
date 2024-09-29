@@ -12,7 +12,9 @@ static bool objectHasTag(OBJECT *obj, const char *noun)
 		for (tag = obj->tags; *tag  != NULL; tag++)
 		{
 			if (strcmp(*tag, noun) == 0)
+			{
 				return true;
+			}
 		}
 	}
 	return false;
@@ -25,7 +27,7 @@ static OBJECT *getObject(const char *noun, OBJECT *from, DISTANCE maxDistance)
 	OBJECT *obj, *res = NULL;
 	for (obj = objs; obj < endOfObjs; obj++)
 	{
-		if (objectHasTag(obj, noun) && getDistance(from , obj) <= maxDistance)
+		if (objectHasTag(obj, noun) && (getDistance(from , obj) <= maxDistance))
 		{
 			res = res == NULL ? obj : &ambiguousNoun;
 		}
