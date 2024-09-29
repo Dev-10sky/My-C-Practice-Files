@@ -1,8 +1,10 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include "object.h"
 
 typedef struct object
 {
+    bool (*condition)(void);
     const char *description;
     const char **tags;
     struct object *location;
@@ -77,6 +79,16 @@ extern OBJECT objs[];
     capacity    20
 
 - enterCave
+    condition   { return guard->health == 0 || silver->location == guard; }
+    description "a cave entrance to the east"
+    tags        "east", "entrance"
+    location    field
+    destination cave
+    details     "The entrace is a wide opening in the mountain with a stone runic plaque above it."
+    textGo      "The guard is stopping you from entering the cave."
+
+- enterCaveBlocked
+    condition   { return guard->health > 0 && silver->location != guard; }
     description "a cave entrance to the east"
     tags        "east", "entrance"
     location    field
