@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "object.h"
+#include "toggle.h"
 
 typedef struct object
 {
@@ -16,6 +17,10 @@ typedef struct object
     int weight;
     int capacity;
     int health;
+    void (*open)(void);
+    void (*close)(void);
+    void (*lock)(void);
+    void (*unlock)(void);
 } OBJECT;
 
 extern OBJECT objs[];
@@ -48,7 +53,7 @@ extern OBJECT objs[];
 - gold
     description "a blessed lustrous golden coin"
     tags        "gold", "coin", "gold coin"
-    location    cave
+    location    openBox
     details     "The coin is old and clearly has no known denomination and is a priceless aretefact."
     weight      1
 
@@ -86,6 +91,7 @@ extern OBJECT objs[];
     destination cave
     details     "The entrace is a wide opening in the mountain with a stone runic plaque above it."
     textGo      "You walk into the cave."
+    open        isAlreadyOpen
 
 - enterCaveBlocked
     condition   { return !(*enterCave->condition)(); }
@@ -95,6 +101,7 @@ extern OBJECT objs[];
     prospect    cave
     details     "The entrace is a wide opening in the mountain with a stone runic plaque above it."
     textGo      "The guard is stopping you from entering the cave."
+    open        isAlreadyOpen
 
 - exitCave
     description "an exit to the west"
@@ -103,6 +110,7 @@ extern OBJECT objs[];
     destination field
     details     "The moon hangs in the sky in the opening through the cave wall."
     textGo      "You leave the cave."
+    open        isAlreadyOpen
 
 - enterForest
     description "a forest entrance to the west"
@@ -129,7 +137,97 @@ extern OBJECT objs[];
 
 - wallCave
     description "solid rock all around"
-    tags        "east", "north", "south", "rock"
+    tags        "east", "north", "rock"
     location    cave
     details     "Carved into the stone is a secret password 'abcd'."
     textGo      "Solid rock is blocking the way."
+
+- backroom
+    description "a backroom"
+    tags        "backroom"
+    details     "The room is dusty and messy."
+    capacity    9999
+
+- wallBackroom
+    description "solid rock all around"
+    tags        "east", "west", "south", "rock"
+    location    backroom
+    details     "Rocky walls with embedded black stones."
+    textGo      "Solid rock is blocking the way."
+
+- openDoorToBackroom
+    description "an open door to the south"
+    tags        "south", "door", "doorway"
+    destination backroom
+    details     "The door is open."
+    textGo      "You walk through the door into the backroom."
+    open        isAlreadyOpen
+    close       toggleDoorToBackroom
+
+- closedDoorToBackroom
+    description "a closed door to the south"
+    tags        "south", "door", "doorway"
+    location    cave
+    prospect    backroom
+    details     "The door is closed."
+    textGo      "The door is closed."
+    open        toggleDoorToBackroom
+    close       isAlreadyClosed
+
+- openDoorToCave
+    description "an open door to the north"
+    tags        "north", "door", "doorway"
+    destination cave
+    details     "The door is open."
+    textGo      "You walk through the door into the cave."
+    open        isAlreadyOpen
+    close       toggleDoorToCave
+
+- closedDoorToCave
+    description "a closed door to the north"
+    tags        "north", "door", "doorway"
+    location    backroom
+    prospect    cave
+    details     "The door is closed."
+    textGo      "The door is closed."
+    open        toggleDoorToCave
+    close       isAlreadyClosed
+
+- openBox
+    description "a wooden box"
+    tags        "box", "wooden box"
+    details     "The box is open."
+    weight      5
+    capacity    20
+    open        isAlreadyOpen
+    close       toggleBox
+    lock        isStillOpen
+    unlock      isAlreadyOpen
+
+- closedBox
+    description "a wooden box"
+    tags        "box", "wooden box"
+    details     "The box is closed."
+    weight      5
+    open        toggleBox
+    close       isAlreadyClosed
+    lock        toggleBoxLock
+    unlock      isAlreadyUnlocked
+
+- lockedBox
+    description "a wooden box"
+    tags        "box", "wooden box"
+    location    backroom
+    details     "The box is closed."
+    weight      5
+    open        isStillLocked
+    close       isAlreadyClosed
+    lock        isAlreadyLocked
+    unlock      toggleBoxLock
+
+- keyForBox
+    description "a tiny key"
+    tags        "key", "tiny key"
+    location    cave
+    details     "The key is really small and shiny."
+    weight      1

@@ -13,6 +13,10 @@ typedef struct object
     int weight;
     int capacity;
     int health;
+    void (*open)(void);
+    void (*close)(void);
+    void (*lock)(void);
+    void (*unlock)(void);
 } OBJECT;
 
 extern OBJECT objs[];
@@ -32,7 +36,17 @@ extern OBJECT objs[];
 #define exitForest	(objs + 12)
 #define wallField	(objs + 13)
 #define wallCave	(objs + 14)
+#define backroom	(objs + 15)
+#define wallBackroom	(objs + 16)
+#define openDoorToBackroom	(objs + 17)
+#define closedDoorToBackroom	(objs + 18)
+#define openDoorToCave	(objs + 19)
+#define closedDoorToCave	(objs + 20)
+#define openBox	(objs + 21)
+#define closedBox	(objs + 22)
+#define lockedBox	(objs + 23)
+#define keyForBox	(objs + 24)
 
-#define endOfObjs	(objs + 15)
+#define endOfObjs	(objs + 25)
 
 #define validObject(obj)	((obj) != NULL && (*(obj)->condition)())

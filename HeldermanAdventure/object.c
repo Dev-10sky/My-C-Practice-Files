@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "object.h"
+#include "toggle.h"
 static const char *tags0[] = { "field", NULL};
 static const char *tags1[] = { "cave", NULL};
 static const char *tags2[] = { "forest", NULL};
@@ -17,7 +18,17 @@ static const char *tags10[] = { "west", "exit", NULL};
 static const char *tags11[] = { "forest entrance", NULL};
 static const char *tags12[] = { "forest exit", NULL};
 static const char *tags13[] = { "west", "north", "south", "grass", NULL};
-static const char *tags14[] = { "east", "north", "south", "rock", NULL};
+static const char *tags14[] = { "east", "north", "rock", NULL};
+static const char *tags15[] = { "backroom", NULL};
+static const char *tags16[] = { "east", "west", "south", "rock", NULL};
+static const char *tags17[] = { "south", "door", "doorway", NULL};
+static const char *tags18[] = { "south", "door", "doorway", NULL};
+static const char *tags19[] = { "north", "door", "doorway", NULL};
+static const char *tags20[] = { "north", "door", "doorway", NULL};
+static const char *tags21[] = { "box", "wooden box", NULL};
+static const char *tags22[] = { "box", "wooden box", NULL};
+static const char *tags23[] = { "box", "wooden box", NULL};
+static const char *tags24[] = { "key", "tiny key", NULL};
 
 static bool alwaysTrue(void) { return true; }
 
@@ -34,7 +45,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		99,
 		 9999,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 1 = cave */
 		alwaysTrue,
@@ -48,7 +63,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		99,
 		 9999,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 2 = forest */
 		alwaysTrue,
@@ -62,7 +81,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		99,
 		 9999,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 3 = silver */
 		alwaysTrue,
@@ -76,13 +99,17 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		 1,
 		0,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 4 = gold */
 		alwaysTrue,
 		 "a blessed lustrous golden coin",
 		tags4,
-		 cave,
+		 openBox,
 		NULL,
 		NULL,
 		 "The coin is old and clearly has no known denomination and is a priceless aretefact.",
@@ -90,7 +117,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		 1,
 		0,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 5 = guard */
 		alwaysTrue,
@@ -104,7 +135,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		99,
 		 20,
-		 100
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 6 = basket */
 		alwaysTrue,
@@ -118,7 +153,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		 3,
 		 60,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 7 = player */
 		alwaysTrue,
@@ -132,7 +171,11 @@ OBJECT objs[] = {
 		"You can't get much closer than this.",
 		99,
 		 20,
-		 100
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 8 = enterCave */
 		condition8,
@@ -146,7 +189,11 @@ OBJECT objs[] = {
 		 "You walk into the cave.",
 		99,
 		0,
-		0
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 9 = enterCaveBlocked */
 		condition9,
@@ -160,7 +207,11 @@ OBJECT objs[] = {
 		 "The guard is stopping you from entering the cave.",
 		99,
 		0,
-		0
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 10 = exitCave */
 		alwaysTrue,
@@ -174,7 +225,11 @@ OBJECT objs[] = {
 		 "You leave the cave.",
 		99,
 		0,
-		0
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 11 = enterForest */
 		alwaysTrue,
@@ -188,7 +243,11 @@ OBJECT objs[] = {
 		 "There is nothing stopping you from going forward.",
 		99,
 		0,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 12 = exitForest */
 		alwaysTrue,
@@ -202,7 +261,11 @@ OBJECT objs[] = {
 		 "You walk out of the dark forest.",
 		99,
 		0,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 13 = wallField */
 		alwaysTrue,
@@ -216,7 +279,11 @@ OBJECT objs[] = {
 		 "Dense forest growth is blocking the way.",
 		99,
 		0,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	},
 	{	/* 14 = wallCave */
 		alwaysTrue,
@@ -230,6 +297,190 @@ OBJECT objs[] = {
 		 "Solid rock is blocking the way.",
 		99,
 		0,
-		0
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 15 = backroom */
+		alwaysTrue,
+		 "a backroom",
+		tags15,
+		NULL,
+		NULL,
+		NULL,
+		 "The room is dusty and messy.",
+		"You see",
+		"You can't get much closer than this.",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 16 = wallBackroom */
+		alwaysTrue,
+		 "solid rock all around",
+		tags16,
+		 backroom,
+		NULL,
+		NULL,
+		 "Rocky walls with embedded black stones.",
+		"You see",
+		 "Solid rock is blocking the way.",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 17 = openDoorToBackroom */
+		alwaysTrue,
+		 "an open door to the south",
+		tags17,
+		NULL,
+		 backroom,
+		 backroom,
+		 "The door is open.",
+		"You see",
+		 "You walk through the door into the backroom.",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		 toggleDoorToBackroom,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 18 = closedDoorToBackroom */
+		alwaysTrue,
+		 "a closed door to the south",
+		tags18,
+		 cave,
+		NULL,
+		 backroom,
+		 "The door is closed.",
+		"You see",
+		 "The door is closed.",
+		99,
+		0,
+		0,
+		 toggleDoorToBackroom,
+		 isAlreadyClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 19 = openDoorToCave */
+		alwaysTrue,
+		 "an open door to the north",
+		tags19,
+		NULL,
+		 cave,
+		 cave,
+		 "The door is open.",
+		"You see",
+		 "You walk through the door into the cave.",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		 toggleDoorToCave,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 20 = closedDoorToCave */
+		alwaysTrue,
+		 "a closed door to the north",
+		tags20,
+		 backroom,
+		NULL,
+		 cave,
+		 "The door is closed.",
+		"You see",
+		 "The door is closed.",
+		99,
+		0,
+		0,
+		 toggleDoorToCave,
+		 isAlreadyClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 21 = openBox */
+		alwaysTrue,
+		 "a wooden box",
+		tags21,
+		NULL,
+		NULL,
+		NULL,
+		 "The box is open.",
+		"You see",
+		"You can't get much closer than this.",
+		 5,
+		 20,
+		0,
+		 isAlreadyOpen,
+		 toggleBox,
+		 isStillOpen,
+		 isAlreadyOpen
+	},
+	{	/* 22 = closedBox */
+		alwaysTrue,
+		 "a wooden box",
+		tags22,
+		NULL,
+		NULL,
+		NULL,
+		 "The box is closed.",
+		"You see",
+		"You can't get much closer than this.",
+		 5,
+		0,
+		0,
+		 toggleBox,
+		 isAlreadyClosed,
+		 toggleBoxLock,
+		 isAlreadyUnlocked
+	},
+	{	/* 23 = lockedBox */
+		alwaysTrue,
+		 "a wooden box",
+		tags23,
+		 backroom,
+		NULL,
+		NULL,
+		 "The box is closed.",
+		"You see",
+		"You can't get much closer than this.",
+		 5,
+		0,
+		0,
+		 isStillLocked,
+		 isAlreadyClosed,
+		 isAlreadyLocked,
+		 toggleBoxLock
+	},
+	{	/* 24 = keyForBox */
+		alwaysTrue,
+		 "a tiny key",
+		tags24,
+		 cave,
+		NULL,
+		NULL,
+		 "The key is really small and shiny.",
+		"You see",
+		"You can't get much closer than this.",
+		 1,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
 	}
 };
