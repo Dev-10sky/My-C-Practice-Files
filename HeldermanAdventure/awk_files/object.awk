@@ -5,6 +5,9 @@ BEGIN {
       print "\nstatic bool alwaysTrue(void) { return true; }";
       print "\nOBJECT objs[] = {";
    }
+   if (pass == "h"){
+      print "#ifndef OBJECT_H \n#define OBJECT_H";
+   }
 }
 /^- / {
    outputRecord(",");
@@ -49,6 +52,7 @@ END {
       print "\n#define endOfObjs\t(objs + " count ")";
       print "\n#define validObject(obj)\t" \
             "((obj) != NULL && (*(obj)->condition)())";
+      print "\n#endif";
    }
 }
 function outputRecord(separator)

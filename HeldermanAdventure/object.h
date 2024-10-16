@@ -1,3 +1,5 @@
+#ifndef OBJECT_H 
+#define OBJECT_H
 
 typedef struct object
 {
@@ -50,3 +52,5 @@ extern OBJECT objs[];
 #define endOfObjs	(objs + 25)
 
 #define validObject(obj)	((obj) != NULL && (*(obj)->condition)())
+
+#endif
