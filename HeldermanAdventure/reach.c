@@ -12,7 +12,7 @@ OBJECT *reachableObject(const char *intention, const char *noun)
     case distSelf:
         printf("You should not be doing that to yourself.\n");
         break;
-    case distHeld:
+    // case distHeld:
     case distHeldContained:
         printf("You would have to get it from %s first.\n",
                 obj->location->description);

@@ -15,6 +15,7 @@ typedef struct object
     int weight;
     int capacity;
     int health;
+    int light;
     void (*open)(void);
     void (*close)(void);
     void (*lock)(void);
@@ -48,8 +49,10 @@ extern OBJECT objs[];
 #define closedBox	(objs + 22)
 #define lockedBox	(objs + 23)
 #define keyForBox	(objs + 24)
+#define lampOff	(objs + 25)
+#define lampOn	(objs + 26)
 
-#define endOfObjs	(objs + 25)
+#define endOfObjs	(objs + 27)
 
 #define validObject(obj)	((obj) != NULL && (*(obj)->condition)())
 

@@ -1,3 +1,6 @@
+#ifndef TOGGLE_H
+#define TOGGLE_H
+
 extern void cannotBeOpened(void);
 extern void cannotBeClosed(void);
 extern void cannotBeLocked(void);
@@ -15,3 +18,6 @@ extern void toggleDoorToBackroom(void);
 extern void toggleDoorToCave(void);
 extern void toggleBox(void);
 extern void toggleBoxLock(void);
+
+extern void toggleLamp(void);
+#endif
