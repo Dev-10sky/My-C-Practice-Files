@@ -1,7 +1,7 @@
 CFLAGS=-g -Wall -std=c99
 RFLAGS=rm -rf *.o
-cfiles = object.c reach.c openclose.c toggle.c parsexec.c location.c noun.c misc.c match.c move.c inventory.c inventory2.c onoff.c main.c 
-hfiles = object.h reach.h openclose.h toggle.h parsexec.h location.h noun.h misc.h match.h move.h inventory.h inventory2.h onoff.h
+cfiles = object.c reach.c openclose.c toggle.c parsexec.c location.c noun.c misc.c match.c expand.c move.c inventory.c inventory2.c onoff.c main.c 
+hfiles = object.h reach.h openclose.h toggle.h parsexec.h location.h noun.h misc.h match.h expand.h move.h inventory.h inventory2.h onoff.h
 txtpath = txt_files
 awkpath = awk_files
 dotpath = dot_files

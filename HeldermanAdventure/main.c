@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include "expand.h"
 #include "parsexec.h"
 
 static char input[100] = "look around";
@@ -62,7 +63,7 @@ int main(int argc, char *argv[])
 	(void)argc;
 	printf("Welcome to the Little Cave Adventure. \n");
 //	printf("It's kinda really dark in here. \n");
-	while (parseAndExecute(input) && getInput(argv[1]));
+	while (parseAndExecute(expand(input, sizeof input)) && getInput(argv[1]));
 	printf("\nBye!\n");
 	return 0;
 }
