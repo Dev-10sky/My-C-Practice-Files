@@ -19,7 +19,7 @@ You have:
 a shining silver coin
 
 -->examine coin
-The coin has stalks of wheat tiede with a ribbon engraved onto it.
+The coin has stalks of wheat tied with a ribbon engraved onto it.
 
 -->give coin
 You give a shining silver coin to a burly guard.

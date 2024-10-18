@@ -14,6 +14,7 @@ typedef struct object
     const char *details;
     const char *contents;
     const char *textGo;
+    const char *gossip;
     int weight;
     int capacity;
     int health;
@@ -26,10 +27,15 @@ typedef struct object
 
 extern OBJECT objs[];
 
+- gossipEWNS
+    tags        "east", "west", "north", "south"
+    gossip      "It's just a direction on the compass."
+
 - field
     description "an open grassy field"
     tags        "field"
     details     "The grassy field is a wide and calming space under a nightime sky."
+    gossip      "It seems not often treaded."
     capacity    9999
     light       100
 
@@ -37,19 +43,22 @@ extern OBJECT objs[];
     description "a little dark mountanside cave"
     tags        "cave"
     details     "The mountainside cave is a cold, dark, and rocky chamber."
+    gossip      "It's dark in there; better bring a light source!."
     capacity    9999
 
 - forest
     description "dark miasma laden dark forest"
     tags        "forest"
     details     "The forest is an old, dark, and aged area with a tree cover obscuring the sky."
+    gossip      "No one really knows what goes on in there."
     capacity    9999
 
 - silver
     description "a shining silver coin"
     tags        "silver", "coin", "silver coin"
     location    field
-    details     "The coin has stalks of wheat tiede with a ribbon engraved onto it."
+    details     "The coin has stalks of wheat tied with a ribbon engraved onto it."
+    gossip      "Money makes the world go round..."
     weight      1
 
 - gold
@@ -57,6 +66,7 @@ extern OBJECT objs[];
     tags        "gold", "coin", "gold coin"
     location    openBox
     details     "The coin is old and clearly has no known denomination and is a priceless aretefact."
+    gossip      "Money makes the world go round..."
     weight      1
 
 - guard
@@ -64,6 +74,7 @@ extern OBJECT objs[];
     tags        "guard", "burly guard"
     location    field
     details     "The guard is a big and burly guy."
+    gossip      "He does his job stiffly but, every gear can be greased..."
     contents    "He has"
     health      100
     capacity    20
@@ -73,6 +84,7 @@ extern OBJECT objs[];
     tags        "basket"
     location    forest
     details     "The basket is an wood woven creation with a few holes in it."
+    gossip      "Some say baskets are the last great human invention..."
     weight      3
     capacity    60
 
@@ -81,6 +93,7 @@ extern OBJECT objs[];
     tags        "yourself"
     location    field
     details     "You need a mirror or reflective surface to view yourself."
+    gossip      "You're a new face huh? Dont get many of those round here."
     contents    "You have"
     health      100
     capacity    20
@@ -136,6 +149,7 @@ extern OBJECT objs[];
     location    field
     details     "The field is surrounded by trees, roots, and undergrowth."
     textGo      "Dense forest growth is blocking the way."
+    gossip      "You cannot go there, its pretty hard to get through."
 
 - wallCave
     description "solid rock all around"
@@ -143,11 +157,13 @@ extern OBJECT objs[];
     location    cave
     details     "Carved into the stone is a secret password 'abcd'."
     textGo      "Solid rock is blocking the way."
+    gossip      "You cannot go there, its just rock."
 
 - backroom
     description "a backroom"
     tags        "backroom"
     details     "The room is dusty and messy."
+    gossip      "There is definitely something in here worth hiding it away."
     capacity    9999
 
 - wallBackroom
@@ -156,6 +172,7 @@ extern OBJECT objs[];
     location    backroom
     details     "Rocky walls with embedded black stones."
     textGo      "Solid rock is blocking the way."
+    gossip      "You cannot go there, its just bland wood."
 
 - openDoorToBackroom
     description "an open door to the south"
@@ -199,6 +216,7 @@ extern OBJECT objs[];
     description "a wooden box"
     tags        "box", "wooden box"
     details     "The box is open."
+    gossip      "You need a key to open it."
     weight      5
     capacity    20
     open        isAlreadyOpen
@@ -232,6 +250,7 @@ extern OBJECT objs[];
     tags        "key", "tiny key"
     location    cave
     details     "The key is really small and shiny."
+    gossip      "A small key opens a small lock."
     weight      1
 
 - lampOff
@@ -239,6 +258,7 @@ extern OBJECT objs[];
     tags        "lamp"
     location    field
     details     "The lamp is off."
+    gossip      "Essential tool for dark areas."
     weight      5
 
 - lampOn

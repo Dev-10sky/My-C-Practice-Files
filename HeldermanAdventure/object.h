@@ -12,6 +12,7 @@ typedef struct object
     const char *details;
     const char *contents;
     const char *textGo;
+    const char *gossip;
     int weight;
     int capacity;
     int health;
@@ -24,35 +25,36 @@ typedef struct object
 
 extern OBJECT objs[];
 
-#define field	(objs + 0)
-#define cave	(objs + 1)
-#define forest	(objs + 2)
-#define silver	(objs + 3)
-#define gold	(objs + 4)
-#define guard	(objs + 5)
-#define basket	(objs + 6)
-#define player	(objs + 7)
-#define enterCave	(objs + 8)
-#define enterCaveBlocked	(objs + 9)
-#define exitCave	(objs + 10)
-#define enterForest	(objs + 11)
-#define exitForest	(objs + 12)
-#define wallField	(objs + 13)
-#define wallCave	(objs + 14)
-#define backroom	(objs + 15)
-#define wallBackroom	(objs + 16)
-#define openDoorToBackroom	(objs + 17)
-#define closedDoorToBackroom	(objs + 18)
-#define openDoorToCave	(objs + 19)
-#define closedDoorToCave	(objs + 20)
-#define openBox	(objs + 21)
-#define closedBox	(objs + 22)
-#define lockedBox	(objs + 23)
-#define keyForBox	(objs + 24)
-#define lampOff	(objs + 25)
-#define lampOn	(objs + 26)
+#define gossipEWNS	(objs + 0)
+#define field	(objs + 1)
+#define cave	(objs + 2)
+#define forest	(objs + 3)
+#define silver	(objs + 4)
+#define gold	(objs + 5)
+#define guard	(objs + 6)
+#define basket	(objs + 7)
+#define player	(objs + 8)
+#define enterCave	(objs + 9)
+#define enterCaveBlocked	(objs + 10)
+#define exitCave	(objs + 11)
+#define enterForest	(objs + 12)
+#define exitForest	(objs + 13)
+#define wallField	(objs + 14)
+#define wallCave	(objs + 15)
+#define backroom	(objs + 16)
+#define wallBackroom	(objs + 17)
+#define openDoorToBackroom	(objs + 18)
+#define closedDoorToBackroom	(objs + 19)
+#define openDoorToCave	(objs + 20)
+#define closedDoorToCave	(objs + 21)
+#define openBox	(objs + 22)
+#define closedBox	(objs + 23)
+#define lockedBox	(objs + 24)
+#define keyForBox	(objs + 25)
+#define lampOff	(objs + 26)
+#define lampOn	(objs + 27)
 
-#define endOfObjs	(objs + 27)
+#define endOfObjs	(objs + 28)
 
 #define validObject(obj)	((obj) != NULL && (*(obj)->condition)())
 
