@@ -51,7 +51,7 @@ obj && /^[ \t]+[a-z]/ {
    print;
 }
 END {
-   outputRecord("\n};");
+   outputRecord("\n}, *player = nobody;");
    if (pass == "h") {
       print "\n#define endOfObjs\t(objs + " count ")";
       print "\n#define validObject(obj)\t" \

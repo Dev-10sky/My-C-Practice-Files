@@ -5,37 +5,41 @@
 static const char *tags0[] = { "heaven", "little heaven", NULL};
 static const char *tags1[] = { "portal", "respawn portal", NULL};
 static const char *tags2[] = { "east", "west", "north", "south", NULL};
-static const char *tags3[] = { "field", NULL};
-static const char *tags4[] = { "cave", NULL};
-static const char *tags5[] = { "forest", NULL};
-static const char *tags6[] = { "silver", "coin", "silver coin", NULL};
-static const char *tags7[] = { "gold", "coin", "gold coin", NULL};
-static const char *tags8[] = { "guard", "burly guard", NULL};
-static const char *tags9[] = { "basket", NULL};
-static const char *tags10[] = { "yourself", NULL};
-static bool condition11(void)  { return guard->health == 0 || silver->location == guard; }
-static const char *tags11[] = { "east", "entrance", NULL};
-static bool condition12(void)  { return !(*enterCave->condition)(); }
-static const char *tags12[] = { "east", "entrance", NULL};
-static const char *tags13[] = { "west", "exit", NULL};
-static const char *tags14[] = { "forest entrance", NULL};
-static const char *tags15[] = { "forest exit", NULL};
-static const char *tags16[] = { "west", "north", "south", "grass", NULL};
-static const char *tags17[] = { "east", "north", "rock", NULL};
-static const char *tags18[] = { "backroom", NULL};
-static const char *tags19[] = { "east", "west", "south", "rock", NULL};
-static const char *tags20[] = { "south", "door", "doorway", NULL};
-static const char *tags21[] = { "south", "door", "doorway", NULL};
-static const char *tags22[] = { "north", "door", "doorway", NULL};
-static const char *tags23[] = { "north", "door", "doorway", NULL};
-static const char *tags24[] = { "box", "wooden box", NULL};
-static const char *tags25[] = { "box", "wooden box", NULL};
-static const char *tags26[] = { "box", "wooden box", NULL};
-static const char *tags27[] = { "key", "tiny key", NULL};
-static const char *tags28[] = { "lamp", NULL};
-static const char *tags29[] = { "lamp", NULL};
-static const char *tags30[] = { "club", "wooden club", NULL};
-static const char *tags31[] = { "dagger", NULL};
+static const char *tags3[] = { "room", "waiting room", NULL};
+static const char *tags4[] = { "wall", "east", "west", "north", "south", NULL};
+static const char *tags5[] = { "nobody", NULL};
+static const char *tags6[] = { "field", NULL};
+static const char *tags7[] = { "cave", NULL};
+static const char *tags8[] = { "forest", NULL};
+static const char *tags9[] = { "silver", "coin", "silver coin", NULL};
+static const char *tags10[] = { "gold", "coin", "gold coin", NULL};
+static const char *tags11[] = { "guard", "burly guard", NULL};
+static const char *tags12[] = { "basket", NULL};
+static const char *tags13[] = { "jack", "warrior", "man", NULL};
+static const char *tags14[] = { "jill", "valkyrie", "woman", NULL};
+static bool condition15(void)  { return guard->health == 0 || silver->location == guard; }
+static const char *tags15[] = { "east", "entrance", NULL};
+static bool condition16(void)  { return !(*enterCave->condition)(); }
+static const char *tags16[] = { "east", "entrance", NULL};
+static const char *tags17[] = { "west", "exit", NULL};
+static const char *tags18[] = { "forest entrance", NULL};
+static const char *tags19[] = { "forest exit", NULL};
+static const char *tags20[] = { "west", "north", "south", "grass", NULL};
+static const char *tags21[] = { "east", "north", "rock", NULL};
+static const char *tags22[] = { "backroom", NULL};
+static const char *tags23[] = { "east", "west", "south", "rock", NULL};
+static const char *tags24[] = { "south", "door", "doorway", NULL};
+static const char *tags25[] = { "south", "door", "doorway", NULL};
+static const char *tags26[] = { "north", "door", "doorway", NULL};
+static const char *tags27[] = { "north", "door", "doorway", NULL};
+static const char *tags28[] = { "box", "wooden box", NULL};
+static const char *tags29[] = { "box", "wooden box", NULL};
+static const char *tags30[] = { "box", "wooden box", NULL};
+static const char *tags31[] = { "key", "tiny key", NULL};
+static const char *tags32[] = { "lamp", NULL};
+static const char *tags33[] = { "lamp", NULL};
+static const char *tags34[] = { "club", "wooden club", NULL};
+static const char *tags35[] = { "dagger", NULL};
 
 static bool alwaysTrue(void) { return true; }
 
@@ -106,10 +110,76 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 3 = field */
+	{	/* 3 = waitingRoom */
+		alwaysTrue,
+		 "the waiting room",
+		tags3,
+		NULL,
+		NULL,
+		NULL,
+		 "This is where all players start. Please enter: play YourName.",
+		"You see",
+		"You can't get much closer than this.",
+		 "It's where all the bad adventurers have to stay.",
+		99,
+		 9999,
+		0,
+		 100,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 4 = waitingRoomWall */
+		alwaysTrue,
+		 "walls all around you",
+		tags4,
+		 waitingRoom,
+		NULL,
+		NULL,
+		 "Written on the wall, it says: play Jack or play Jill.",
+		"You see",
+		 "You cannot go anywhere.",
+		"I know nothing about that.",
+		99,
+		0,
+		0,
+		0,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 5 = nobody */
+		alwaysTrue,
+		 "nobody",
+		tags5,
+		 waitingRoom,
+		NULL,
+		NULL,
+		 "You are nobody. Please enter: play xxx",
+		 "You have",
+		"You can't get much closer than this.",
+		"I know nothing about that.",
+		99,
+		 1,
+		 100,
+		0,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 6 = field */
 		alwaysTrue,
 		 "an open grassy field",
-		tags3,
+		tags6,
 		NULL,
 		NULL,
 		NULL,
@@ -128,10 +198,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 4 = cave */
+	{	/* 7 = cave */
 		alwaysTrue,
 		 "a little dark mountanside cave",
-		tags4,
+		tags7,
 		NULL,
 		NULL,
 		NULL,
@@ -150,10 +220,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 5 = forest */
+	{	/* 8 = forest */
 		alwaysTrue,
 		 "dark miasma laden dark forest",
-		tags5,
+		tags8,
 		NULL,
 		NULL,
 		NULL,
@@ -172,10 +242,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 6 = silver */
+	{	/* 9 = silver */
 		alwaysTrue,
 		 "a shining silver coin",
-		tags6,
+		tags9,
 		 field,
 		NULL,
 		NULL,
@@ -194,10 +264,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 7 = gold */
+	{	/* 10 = gold */
 		alwaysTrue,
 		 "a blessed lustrous golden coin",
-		tags7,
+		tags10,
 		 openBox,
 		NULL,
 		NULL,
@@ -216,10 +286,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 8 = guard */
+	{	/* 11 = guard */
 		alwaysTrue,
 		 "a burly guard",
-		tags8,
+		tags11,
 		 field,
 		NULL,
 		NULL,
@@ -238,10 +308,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 9 = basket */
+	{	/* 12 = basket */
 		alwaysTrue,
 		 "a worn out brown basket",
-		tags9,
+		tags12,
 		 forest,
 		NULL,
 		NULL,
@@ -260,17 +330,17 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 10 = player */
+	{	/* 13 = jack */
 		alwaysTrue,
-		 "yourself",
-		tags10,
+		 "Jack",
+		tags13,
 		 field,
 		NULL,
 		NULL,
-		 "You need a mirror or reflective surface to view yourself.",
-		 "You have",
+		 "Jack is a fearsome warrior.",
+		 "Jack has",
 		"You can't get much closer than this.",
-		 "You're a new face huh? Dont get many of those round here.",
+		 "Jack is a fearsome warrior.",
 		99,
 		 20,
 		 100,
@@ -282,10 +352,32 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 11 = enterCave */
-		condition11,
+	{	/* 14 = jill */
+		alwaysTrue,
+		 "Jill",
+		tags14,
+		 field,
+		NULL,
+		NULL,
+		 "Jill is a vicious valkyrie.",
+		 "Jill has",
+		"You can't get much closer than this.",
+		 "Jill is a vicious valkyrie.",
+		99,
+		 20,
+		 100,
+		0,
+		 -1,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 15 = enterCave */
+		condition15,
 		 "a cave entrance to the east",
-		tags11,
+		tags15,
 		 field,
 		 cave,
 		 cave,
@@ -304,10 +396,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 12 = enterCaveBlocked */
-		condition12,
+	{	/* 16 = enterCaveBlocked */
+		condition16,
 		 "a cave entrance to the east",
-		tags12,
+		tags16,
 		 field,
 		NULL,
 		 cave,
@@ -326,10 +418,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 13 = exitCave */
+	{	/* 17 = exitCave */
 		alwaysTrue,
 		 "an exit to the west",
-		tags13,
+		tags17,
 		 cave,
 		 field,
 		 field,
@@ -348,10 +440,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 14 = enterForest */
+	{	/* 18 = enterForest */
 		alwaysTrue,
 		 "a forest entrance to the west",
-		tags14,
+		tags18,
 		 field,
 		NULL,
 		 forest,
@@ -370,10 +462,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 15 = exitForest */
+	{	/* 19 = exitForest */
 		alwaysTrue,
 		 "an exit to the east",
-		tags15,
+		tags19,
 		 forest,
 		 field,
 		 field,
@@ -392,10 +484,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 16 = wallField */
+	{	/* 20 = wallField */
 		alwaysTrue,
 		 "flat grass all around",
-		tags16,
+		tags20,
 		 field,
 		NULL,
 		NULL,
@@ -414,10 +506,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 17 = wallCave */
+	{	/* 21 = wallCave */
 		alwaysTrue,
 		 "solid rock all around",
-		tags17,
+		tags21,
 		 cave,
 		NULL,
 		NULL,
@@ -436,10 +528,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 18 = backroom */
+	{	/* 22 = backroom */
 		alwaysTrue,
 		 "a backroom",
-		tags18,
+		tags22,
 		NULL,
 		NULL,
 		NULL,
@@ -458,10 +550,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 19 = wallBackroom */
+	{	/* 23 = wallBackroom */
 		alwaysTrue,
 		 "solid rock all around",
-		tags19,
+		tags23,
 		 backroom,
 		NULL,
 		NULL,
@@ -480,10 +572,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 20 = openDoorToBackroom */
+	{	/* 24 = openDoorToBackroom */
 		alwaysTrue,
 		 "an open door to the south",
-		tags20,
+		tags24,
 		NULL,
 		 backroom,
 		 backroom,
@@ -502,10 +594,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 21 = closedDoorToBackroom */
+	{	/* 25 = closedDoorToBackroom */
 		alwaysTrue,
 		 "a closed door to the south",
-		tags21,
+		tags25,
 		 cave,
 		NULL,
 		 backroom,
@@ -524,10 +616,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 22 = openDoorToCave */
+	{	/* 26 = openDoorToCave */
 		alwaysTrue,
 		 "an open door to the north",
-		tags22,
+		tags26,
 		NULL,
 		 cave,
 		 cave,
@@ -546,10 +638,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 23 = closedDoorToCave */
+	{	/* 27 = closedDoorToCave */
 		alwaysTrue,
 		 "a closed door to the north",
-		tags23,
+		tags27,
 		 backroom,
 		NULL,
 		 cave,
@@ -568,10 +660,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 24 = openBox */
+	{	/* 28 = openBox */
 		alwaysTrue,
 		 "a wooden box",
-		tags24,
+		tags28,
 		NULL,
 		NULL,
 		NULL,
@@ -590,10 +682,10 @@ OBJECT objs[] = {
 		 isStillOpen,
 		 isAlreadyOpen
 	},
-	{	/* 25 = closedBox */
+	{	/* 29 = closedBox */
 		alwaysTrue,
 		 "a wooden box",
-		tags25,
+		tags29,
 		NULL,
 		NULL,
 		NULL,
@@ -612,10 +704,10 @@ OBJECT objs[] = {
 		 toggleBoxLock,
 		 isAlreadyUnlocked
 	},
-	{	/* 26 = lockedBox */
+	{	/* 30 = lockedBox */
 		alwaysTrue,
 		 "a wooden box",
-		tags26,
+		tags30,
 		 backroom,
 		NULL,
 		NULL,
@@ -634,10 +726,10 @@ OBJECT objs[] = {
 		 isAlreadyLocked,
 		 toggleBoxLock
 	},
-	{	/* 27 = keyForBox */
+	{	/* 31 = keyForBox */
 		alwaysTrue,
 		 "a tiny key",
-		tags27,
+		tags31,
 		 cave,
 		NULL,
 		NULL,
@@ -656,10 +748,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 28 = lampOff */
+	{	/* 32 = lampOff */
 		alwaysTrue,
 		 "a lamp",
-		tags28,
+		tags32,
 		 field,
 		NULL,
 		NULL,
@@ -678,10 +770,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 29 = lampOn */
+	{	/* 33 = lampOn */
 		alwaysTrue,
 		 "a lamp",
-		tags29,
+		tags33,
 		NULL,
 		NULL,
 		NULL,
@@ -700,10 +792,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 30 = club */
+	{	/* 34 = club */
 		alwaysTrue,
 		 "a wooden club",
-		tags30,
+		tags34,
 		 field,
 		NULL,
 		NULL,
@@ -722,10 +814,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 31 = dagger */
+	{	/* 35 = dagger */
 		alwaysTrue,
 		 "a dagger",
-		tags31,
+		tags35,
 		 field,
 		NULL,
 		NULL,
@@ -744,4 +836,4 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	}
-};
+}, *player = nobody;
