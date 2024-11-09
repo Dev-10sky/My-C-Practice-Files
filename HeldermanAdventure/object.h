@@ -17,6 +17,8 @@ typedef struct object
     int capacity;
     int health;
     int light;
+    int impact;
+    int trust;
     void (*open)(void);
     void (*close)(void);
     void (*lock)(void);
@@ -25,36 +27,40 @@ typedef struct object
 
 extern OBJECT objs[];
 
-#define gossipEWNS	(objs + 0)
-#define field	(objs + 1)
-#define cave	(objs + 2)
-#define forest	(objs + 3)
-#define silver	(objs + 4)
-#define gold	(objs + 5)
-#define guard	(objs + 6)
-#define basket	(objs + 7)
-#define player	(objs + 8)
-#define enterCave	(objs + 9)
-#define enterCaveBlocked	(objs + 10)
-#define exitCave	(objs + 11)
-#define enterForest	(objs + 12)
-#define exitForest	(objs + 13)
-#define wallField	(objs + 14)
-#define wallCave	(objs + 15)
-#define backroom	(objs + 16)
-#define wallBackroom	(objs + 17)
-#define openDoorToBackroom	(objs + 18)
-#define closedDoorToBackroom	(objs + 19)
-#define openDoorToCave	(objs + 20)
-#define closedDoorToCave	(objs + 21)
-#define openBox	(objs + 22)
-#define closedBox	(objs + 23)
-#define lockedBox	(objs + 24)
-#define keyForBox	(objs + 25)
-#define lampOff	(objs + 26)
-#define lampOn	(objs + 27)
+#define heaven	(objs + 0)
+#define respawn	(objs + 1)
+#define heavenEWNS	(objs + 2)
+#define field	(objs + 3)
+#define cave	(objs + 4)
+#define forest	(objs + 5)
+#define silver	(objs + 6)
+#define gold	(objs + 7)
+#define guard	(objs + 8)
+#define basket	(objs + 9)
+#define player	(objs + 10)
+#define enterCave	(objs + 11)
+#define enterCaveBlocked	(objs + 12)
+#define exitCave	(objs + 13)
+#define enterForest	(objs + 14)
+#define exitForest	(objs + 15)
+#define wallField	(objs + 16)
+#define wallCave	(objs + 17)
+#define backroom	(objs + 18)
+#define wallBackroom	(objs + 19)
+#define openDoorToBackroom	(objs + 20)
+#define closedDoorToBackroom	(objs + 21)
+#define openDoorToCave	(objs + 22)
+#define closedDoorToCave	(objs + 23)
+#define openBox	(objs + 24)
+#define closedBox	(objs + 25)
+#define lockedBox	(objs + 26)
+#define keyForBox	(objs + 27)
+#define lampOff	(objs + 28)
+#define lampOn	(objs + 29)
+#define club	(objs + 30)
+#define dagger	(objs + 31)
 
-#define endOfObjs	(objs + 28)
+#define endOfObjs	(objs + 32)
 
 #define validObject(obj)	((obj) != NULL && (*(obj)->condition)())
 

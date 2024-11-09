@@ -1,10 +1,30 @@
-go east
-get coin
+mumble
 inventory
-examine coin
-give coin
+get whatever
+get yourself
+get silver coin
+get coin
+get guard
+get cave
+look cave
+inventory
+look at coin
+get lamp
+inventory
 go east
-go north
-go west
-go west
+ask coin
+put coin in cave
+give coin
+give lamp to guard
+look lamp
+get lamp from guard
+ask lamp from guard
+open yourself
+open coin
+open cave
+go cave
+go east
+turn lamp on
+look around
+get key from cave'
 quit

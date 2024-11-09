@@ -5,7 +5,7 @@
 #include "reach.h"
 #include "toggle.h"
 
-bool executeTurnOn(void)
+int executeTurnOn(void)
 {
     OBJECT *obj = reachableObject("what you want to turn on", params[0]);
     if (obj != NULL)
@@ -20,10 +20,10 @@ bool executeTurnOn(void)
                                  : "You cannot turn that on.\n");
         }
     }
-    return true;
+    return 1;
 }
 
-bool executeTurnOff(void)
+int executeTurnOff(void)
 {
     OBJECT *obj = reachableObject("what you want to turn off", params[0]);
     if (obj != NULL)
@@ -38,5 +38,5 @@ bool executeTurnOff(void)
                                   : "You cannot turn that off.\n");
         }
     }
-    return true;
+    return 1;
 }

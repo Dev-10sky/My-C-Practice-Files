@@ -3,6 +3,7 @@
 #include <string.h>
 #include "expand.h"
 #include "parsexec.h"
+#include "turn.h"
 
 static char input[100] = "look around";
 
@@ -57,13 +58,17 @@ static bool getInput(const char *filename)
 	return ok;
 }
 
+static bool processInput(char *ptr, int size)
+{
+	return turn(parseAndExecute(expand(ptr, size)));
+}
 
 int main(int argc, char *argv[])
 {
 	(void)argc;
 	printf("Welcome to the Little Cave Adventure. \n");
 //	printf("It's kinda really dark in here. \n");
-	while (parseAndExecute(expand(input, sizeof input)) && getInput(argv[1]));
+	while (processInput(input, sizeof input) && getInput(argv[1]));
 	printf("\nBye!\n");
 	return 0;
 }

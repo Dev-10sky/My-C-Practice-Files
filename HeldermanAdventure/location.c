@@ -6,7 +6,7 @@
 #include "match.h"
 #include "noun.h"
 
-bool executeLookAround(void)
+int executeLookAround(void)
 {
 	if (isLit(player->location))
 	{
@@ -17,9 +17,9 @@ bool executeLookAround(void)
 		printf("It is very dark in here.\n");
 	}
 	listObjectsAtLocation(player->location);
-	return true;
+	return 1;
 }
-bool executeLook(void)
+int executeLook(void)
 {
 	OBJECT *obj = getVisible("what you want to look at", params[0]);
 	switch (getDistance(player, obj))
@@ -40,7 +40,7 @@ bool executeLook(void)
 		printf("%s\n", obj->details);
 		listObjectsAtLocation(obj);
 	}
-	return true;
+	return 1;
 }
 static void movePlayer(OBJECT *passage)
 {
@@ -52,7 +52,7 @@ static void movePlayer(OBJECT *passage)
 		executeLookAround();
 	}
 }
-bool executeGo(void)
+int executeGo(void)
 {
 	OBJECT *obj = getVisible("where you want to go", params[0]);
 	switch (getDistance(player, obj))
@@ -69,5 +69,5 @@ bool executeGo(void)
 	default:
 		movePlayer(obj);
 	}
-	return true;
+	return 1;
 }

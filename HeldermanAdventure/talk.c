@@ -22,7 +22,7 @@ static void talk(const char *about, OBJECT *to)
     }
 }
 
-bool executeTalk(void)
+int executeTalk(void)
 {
     OBJECT *to = actorHere();
     if (to != NULL)
@@ -33,10 +33,10 @@ bool executeTalk(void)
     {
         printf("There is nobody here to talk to.\n");
     }
-    return true;
+    return 2;
 }
 
-bool executeTalkTo(void)
+int executeTalkTo(void)
 {
     OBJECT *to = reachableObject("who to talk to", params[1]);
     if (to != NULL)
@@ -50,5 +50,5 @@ bool executeTalkTo(void)
             printf("There is no response from %s.\n", to->description);
         }
     }
-    return true;
+    return 2;
 }

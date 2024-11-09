@@ -2,7 +2,7 @@
 // extern void executeClose(const char *noun);
 // extern void executeLock(const char *noun);
 // extern void executeUnlock(const char *noun);
-extern bool executeOpen(void);
-extern bool executeClose(void);
-extern bool executeLock(void);
-extern bool executeUnlock(void);
+extern int executeOpen(void);
+extern int executeClose(void);
+extern int executeLock(void);
+extern int executeUnlock(void);
