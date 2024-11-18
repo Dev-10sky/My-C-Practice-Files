@@ -1,3 +1,4 @@
+
 CFLAGS=-g -Wall -Wextra -Wpedantic -Werror
 RFLAGS=rm -rf *.o
 cfiles = object.c reach.c openclose.c toggle.c parsexec.c location.c noun.c misc.c damage.c turn.c match.c talk.c expand.c move.c inventory.c inventory2.c onoff.c attack.c social.c tcp.c client.c telnet.c print.c outbuf.c break.c server.c main.c 
@@ -13,10 +14,13 @@ all: main map.png
 main: $(cfiles) $(hfiles)
 	cc $(CFLAGS) $(cfiles) -o $@
 object.h: $(awkpath)/object.awk $(txtpath)/object.txt
-	awk -v pass=h -v RS='\r\n' -f $(awkpath)/object.awk $(txtpath)/object.txt > $@
+	awk -v pass=h -f $(awkpath)/object.awk $(txtpath)/object.txt > $@
+#	awk -v pass=h -v RS='\r\n' -f $(awkpath)/object.awk $(txtpath)/object.txt > $@
 object.c: $(awkpath)/object.awk $(txtpath)/object.txt
-	awk -v pass=c1 -v RS='\r\n' -f $(awkpath)/object.awk $(txtpath)/object.txt > $@
-	awk -v pass=c2 -v RS='\r\n' -f $(awkpath)/object.awk $(txtpath)/object.txt >> $@
+	awk -v pass=c1 -f $(awkpath)/object.awk $(txtpath)/object.txt > $@
+	awk -v pass=c2 -f $(awkpath)/object.awk $(txtpath)/object.txt >> $@
+#	awk -v pass=c1 -v RS='\r\n' -f $(awkpath)/object.awk $(txtpath)/object.txt > $@
+#	awk -v pass=c2 -v RS='\r\n' -f $(awkpath)/object.awk $(txtpath)/object.txt >> $@
 map.png: map.gv
 	dot -Tpng -o $(imgpath)/map.png $(dotpath)/$<
 map.gv: $(awkpath)/map.awk $(txtpath)/object.txt
