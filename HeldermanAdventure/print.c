@@ -103,7 +103,7 @@ void printSee(const char *format, ...)
 }
 
 
-printAny(OBJECT *obj1, OBJECT *obj2, const char *sense,
+void printAny(OBJECT *obj1, OBJECT *obj2, const char *sense,
                 const char *format, ...)
 {
     VA(printObserve(obj1, obj2, sense, format, ap));

@@ -44,7 +44,7 @@ void outbufBytes(const char *data, int length)
 {
     for (; length > 0; length--)
     {
-        outbufByte(*data++)
+        outbufByte(*data++);
     }
 }
 

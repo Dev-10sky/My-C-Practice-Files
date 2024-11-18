@@ -1,3 +1,4 @@
+#include <stdarg.h>
 #ifndef OUTBUF_H
 #define OUTBUF_H
 

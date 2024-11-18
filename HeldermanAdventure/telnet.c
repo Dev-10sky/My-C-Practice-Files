@@ -24,7 +24,7 @@ void telnetConfigure(void)
         '\xFF', '\xFD', 34, '\xFF', '\xFA', 34, 1, 0, '\xFF', '\xF0',
         '\xFF', '\xFB', 1
     };
-    // outbufBytes(config, sizeof config);
+    outbufBytes(config, sizeof config);
 }
 
 // this function will use whitespaces to get ridf of the current telnet text line
@@ -56,7 +56,7 @@ void telnetDeletePrompt(INBUF *inbuf)
 
 // this function will parse the input from the clients
 extern void telnetParse(INBUF *inbuf, int fd, void (*action)(char *, int),
-                        const char *dat, int length)
+                        const char *data, int length)
 {
     outbufClear();
     for (int i = 0; i < length; i++)
@@ -90,7 +90,7 @@ extern void telnetParse(INBUF *inbuf, int fd, void (*action)(char *, int),
             (*action)(inbuf->data, sizeof inbuf->data);
             inbuf->index = 0;
             outbufClear();
-            outbufBytes(prompt, sizeof prompt - 1)
+            outbufBytes(prompt, sizeof prompt - 1);
         }
         else if (c == '\b' || c == '\x7F')
         {

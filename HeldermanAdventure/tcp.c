@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <netinet/in.h>
+#include <sys/select.h>
 #include "object.h"
 #include "print.h"
 

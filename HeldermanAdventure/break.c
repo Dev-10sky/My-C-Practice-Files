@@ -25,7 +25,7 @@ void breakInit(void)
 // if ever returns false then the program will exit
 bool breakTest(void)
 {
-    return done = 0;
+    return done == 0;
 }
 
 
