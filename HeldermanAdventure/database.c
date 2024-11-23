@@ -113,20 +113,43 @@ int retrieveDbTable(sqlite3 *db, const char *getQuery, const char *tableName, co
 	printf("\nTrying query:\n %s \n",getQuery);
 
 	int row_counter = 0;
+	char retStr[4096];
+	int keyPtr = 0;
 
 	if (ret_c == SQLITE_OK)
 	{
 		fprintf(stdout, "\nTable %s retrieval success!\n",tableName);
-		fprintf(stdout,"(ID, Name, Condition, Description, Tags)\n");
+		fprintf(stdout,"(ID, Name, Condition, Description, Tags, Location_Id, Destination_Id,"
+				"Prospect_Id, Details, Contents, Textgo, Gossip, Weight, Capacity, Health,"
+				" Light, Impact, Trust,Open_Function, Close_Function, Lock_Function, Unlock_Function)\n");
 		while (sqlite3_step(ret_statement) == SQLITE_ROW)
 		{
-			printf("%d | %s | %s | %s | %s\n",
+			sprintf(retStr+keyPtr, "%d | %s | %s | %s | %s | %d | %d | %d | %s | %s | %s | %s | %d | %d | %d | %d | %d | %d | %s | %s | %s | %s |\n",
 				sqlite3_column_int(ret_statement, 0),
 				sqlite3_column_text(ret_statement, 1),
 				sqlite3_column_text(ret_statement, 2),
 				sqlite3_column_text(ret_statement, 3),
-				sqlite3_column_text(ret_statement, 4)
+				sqlite3_column_text(ret_statement, 4),
+				(sqlite3_column_type(ret_statement, 5) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 5)),
+				(sqlite3_column_type(ret_statement, 6) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 6)),
+				(sqlite3_column_type(ret_statement, 7) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 7)),
+				sqlite3_column_text(ret_statement, 8),
+				sqlite3_column_text(ret_statement, 9),
+				sqlite3_column_text(ret_statement, 10),
+				sqlite3_column_text(ret_statement, 11),
+				(sqlite3_column_type(ret_statement, 12) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 12)),
+				(sqlite3_column_type(ret_statement, 13) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 13)),
+				(sqlite3_column_type(ret_statement, 14) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 14)),
+				(sqlite3_column_type(ret_statement, 15) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 15)),
+				(sqlite3_column_type(ret_statement, 16) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 16)),
+				(sqlite3_column_type(ret_statement, 17) == SQLITE_NULL ? -1 : sqlite3_column_int(ret_statement, 17)),
+				sqlite3_column_text(ret_statement, 18),
+				sqlite3_column_text(ret_statement, 19),
+				sqlite3_column_text(ret_statement, 20),
+				sqlite3_column_text(ret_statement, 21)
 				);
+			keyPtr += strlen(retStr);
+
 		}
 	}
 	else
@@ -134,7 +157,7 @@ int retrieveDbTable(sqlite3 *db, const char *getQuery, const char *tableName, co
 		const char* db_error_msg = sqlite3_errmsg(db);
 		fprintf(stdout, "Table %s retrieval failed, SQL error: %s.\n", tableName,db_error_msg);
 	}
-
+	printf("%s", retStr);
 	sqlite3_finalize(ret_statement);
 	return 0;
 }
